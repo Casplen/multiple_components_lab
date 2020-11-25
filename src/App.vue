@@ -3,12 +3,11 @@
     <header>
       <h1>Country List</h1>
     </header>
-    <div id="main-container">
+    <div id="select-container">
       <label for="country-select">Select a Country: </label>
       <country-select :countries="countries"></country-select>
-      <br>
-      <country-detail :country='selectedCountry'></country-detail>
     </div>
+    <country-detail v-if="selectedCountry" :country='selectedCountry'></country-detail>
   </div>
 </template>
 
@@ -31,7 +30,7 @@ export default {
     .then(data => this.countries = data)
 
     eventBus.$on('country-selected', (country) => {
-      console.log('within $on', country)
+      this.selectedCountry = country
     })
   },
   components: {
@@ -42,5 +41,19 @@ export default {
 </script>
 
 <style>
+div {
+  font-family: 'Roboto', sans-serif;
+}
+
+header {
+  background-color: rgb(172, 214, 252);
+  color: white;
+  padding: 10px;
+}
+
+#select-container {
+  background-color: rgb(228, 228, 228);
+  padding:10px;
+}
 
 </style>
